@@ -84,7 +84,7 @@ export default function App() {
             <Canvas
                 shadows="accumulative"
                 dpr={[1, 1.5]}
-                camera={{ position: [0, 3, 4], fov: 30, near: 0.01, far: 200 }}
+                camera={{ position: [0, 2.27, 4], fov: 30, near: 0.01, far: 200 }}
             >
                 <color attach="background" args={["#0b0b0b"]} />
                 <Environment files={"/umhlanga_sunrise_2k.hdr"} />
@@ -134,7 +134,7 @@ export default function App() {
                     </group>
                 </group>
 
-                <group position={[0, 1, -2]} rotation={[0, Math.PI, 0]} scale={1.8}>
+                <group position={[0, 1, -2]} rotation={[0, Math.PI, 0]} scale={1.6}>
                     <Screen src={video} />
                 </group>
 
