@@ -21,7 +21,9 @@ const YellowSunglasses = forwardRef((props, ref) => {
           material={materials.Glasses}
           position={[0, -184.724, 1.159]}
           rotation={[-0.084, 0, 0]}
-        />
+          >
+          <meshStandardMaterial {...materials.Glasses} depthTest depthWrite />
+        </mesh>
         <mesh
           castShadow
           receiveShadow
@@ -29,7 +31,9 @@ const YellowSunglasses = forwardRef((props, ref) => {
           material={materials.Glasses}
           position={[0, 0.002, -0.003]}
           rotation={[0.002, 0, 0]}
-        />
+          >
+          <meshStandardMaterial {...materials.Glasses} transparent={false} depthTest depthWrite />
+        </mesh>
         <mesh
           castShadow
           receiveShadow
@@ -37,7 +41,9 @@ const YellowSunglasses = forwardRef((props, ref) => {
           material={materials.Glasses}
           position={[0, 0.002, -0.003]}
           rotation={[0.002, 0, 0]}
-        />
+          >
+          <meshStandardMaterial {...materials.Glasses} transparent={false} depthTest depthWrite />
+        </mesh>
       </group>
     </group>
   );
