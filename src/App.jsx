@@ -15,7 +15,6 @@ const CazalSunglasses = lazy(() =>
     import("./components/Models/CazalSunglasses")
 );
 const DarkSunglasses = lazy(() => import("./components/Models/DarkSunglasses"));
-const PinkSunglasses = lazy(() => import("./components/Models/PinkSunglasses"));
 const YellowSunglasses = lazy(() =>
     import("./components/Models/YellowSunglasses")
 );
@@ -33,14 +32,13 @@ export default function App() {
     const groupRef = useRef();
     const playingAnimation = useRef(false);
     const viewingNumber = useRef(0);
-    const glassesRefs = useRef([]);
 
     const prepareAnimation = (direction) => {
         if (playingAnimation.current) return false;
         if (direction === "left") {
             if (viewingNumber.current === 0) return false;
         } else {
-            if (viewingNumber.current === glassesRefs.current.length - 1) return false;
+            if (viewingNumber.current === groupRef.current.children.length - 1) return false;
         }
 
         // set playing animation to true
@@ -118,24 +116,19 @@ export default function App() {
                     maxDistance={2.7}
                 />
 
-                <group ref={groupRef}>
-                    <group name="sunglasses">
-                        <ShowcaseWrapper order={0} innerColor="#ff2020" outerColor="#2877ff">
-                            <WhiteSunglasses ref={(el) => (glassesRefs.current[0] = el)} />
-                        </ShowcaseWrapper>
-                        <ShowcaseWrapper order={1} innerColor="#b61d1d" outerColor="#f7ea31">
-                            <DarkSunglasses ref={(el) => (glassesRefs.current[4] = el)} />
-                        </ShowcaseWrapper>
-                        <ShowcaseWrapper order={2} innerColor="#9948DD" outerColor="#1C3277">
-                            <CazalSunglasses ref={(el) => (glassesRefs.current[1] = el)} />
-                        </ShowcaseWrapper>
-                        <ShowcaseWrapper order={3} innerColor="#1b8427" outerColor="#a21db6">
-                            <PinkSunglasses ref={(el) => (glassesRefs.current[2] = el)} />
-                        </ShowcaseWrapper>
-                        <ShowcaseWrapper order={4} innerColor="#1db61f" outerColor="#847b1b">
-                            <YellowSunglasses ref={(el) => (glassesRefs.current[3] = el)} />
-                        </ShowcaseWrapper>
-                    </group>
+                <group ref={groupRef} name="sunglasses">
+                    <ShowcaseWrapper order={0} innerColor="#ff2020" outerColor="#2877ff">
+                        <WhiteSunglasses />
+                    </ShowcaseWrapper>
+                    <ShowcaseWrapper order={1} innerColor="#b61d1d" outerColor="#f7ea31">
+                        <DarkSunglasses />
+                    </ShowcaseWrapper>
+                    <ShowcaseWrapper order={2} innerColor="#9948DD" outerColor="#1C3277">
+                        <CazalSunglasses />
+                    </ShowcaseWrapper>
+                    <ShowcaseWrapper order={3} innerColor="#1db61f" outerColor="#847b1b">
+                        <YellowSunglasses />
+                    </ShowcaseWrapper>
                 </group>
 
                 <group position={[0, 1, -2]} rotation={[0, Math.PI, 0]} scale={1.6}>
