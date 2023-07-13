@@ -14,6 +14,7 @@ const SwitchArrows = lazy(() =>
 const CazalSunglasses = lazy(() =>
     import("./components/Models/CazalSunglasses")
 );
+const DarkSunglasses = lazy(() => import("./components/Models/DarkSunglasses"));
 const PinkSunglasses = lazy(() => import("./components/Models/PinkSunglasses"));
 const YellowSunglasses = lazy(() =>
     import("./components/Models/YellowSunglasses")
@@ -122,13 +123,16 @@ export default function App() {
                         <ShowcaseWrapper order={0} innerColor="#ff2020" outerColor="#2877ff">
                             <WhiteSunglasses ref={(el) => (glassesRefs.current[0] = el)} />
                         </ShowcaseWrapper>
-                        <ShowcaseWrapper order={1} innerColor="#9948DD" outerColor="#1C3277">
+                        <ShowcaseWrapper order={1} innerColor="#b61d1d" outerColor="#f7ea31">
+                            <DarkSunglasses ref={(el) => (glassesRefs.current[4] = el)} />
+                        </ShowcaseWrapper>
+                        <ShowcaseWrapper order={2} innerColor="#9948DD" outerColor="#1C3277">
                             <CazalSunglasses ref={(el) => (glassesRefs.current[1] = el)} />
                         </ShowcaseWrapper>
-                        <ShowcaseWrapper order={2} innerColor="#1b8427" outerColor="#a21db6">
+                        <ShowcaseWrapper order={3} innerColor="#1b8427" outerColor="#a21db6">
                             <PinkSunglasses ref={(el) => (glassesRefs.current[2] = el)} />
                         </ShowcaseWrapper>
-                        <ShowcaseWrapper order={3} innerColor="#1db61f" outerColor="#847b1b">
+                        <ShowcaseWrapper order={4} innerColor="#1db61f" outerColor="#847b1b">
                             <YellowSunglasses ref={(el) => (glassesRefs.current[3] = el)} />
                         </ShowcaseWrapper>
                     </group>
