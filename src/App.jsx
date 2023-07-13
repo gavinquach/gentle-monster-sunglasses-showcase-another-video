@@ -15,9 +15,6 @@ const CazalSunglasses = lazy(() =>
     import("./components/Models/CazalSunglasses")
 );
 const DarkSunglasses = lazy(() => import("./components/Models/DarkSunglasses"));
-const YellowSunglasses = lazy(() =>
-    import("./components/Models/YellowSunglasses")
-);
 const WhiteSunglasses = lazy(() =>
     import("./components/Models/WhiteSunglasses")
 );
@@ -125,9 +122,6 @@ export default function App() {
                     </ShowcaseWrapper>
                     <ShowcaseWrapper order={2} innerColor="#9948DD" outerColor="#1C3277">
                         <CazalSunglasses />
-                    </ShowcaseWrapper>
-                    <ShowcaseWrapper order={3} innerColor="#1db61f" outerColor="#847b1b">
-                        <YellowSunglasses />
                     </ShowcaseWrapper>
                 </group>
 
