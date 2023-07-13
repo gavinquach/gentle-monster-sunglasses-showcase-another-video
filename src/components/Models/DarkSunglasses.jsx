@@ -12,8 +12,8 @@ import { useGLTF } from "@react-three/drei";
 const DarkSunglasses = forwardRef((props, ref ) => {
     const { nodes, materials } = useGLTF("/dark_sunglasses.glb");
     return (
-        <group {...props} dispose={null}>
-            <group scale={0.01}>
+        <group ref={ref} {...props} dispose={null}>
+            <group position={[0, -0.17, 0]} scale={0.01}>
                 <mesh
                     castShadow
                     receiveShadow
