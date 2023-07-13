@@ -39,7 +39,7 @@ export default function App() {
         if (direction === "left") {
             if (viewingNumber.current === 0) return false;
         } else {
-            if (viewingNumber.current === glassesRefs.current.length) return false;
+            if (viewingNumber.current === glassesRefs.current.length - 1) return false;
         }
 
         // set playing animation to true
