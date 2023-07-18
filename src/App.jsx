@@ -32,6 +32,7 @@ const info = {
 
 export default function App() {
     const groupRef = useRef();
+    const glassesRef = useRef([]);
     const playingAnimation = useRef(false);
 
     const typeWriter = () => {
@@ -64,7 +65,6 @@ export default function App() {
     };
 
     const toggleShowInfo = () => {
-        console.log("toggleShowInfo");
         if (playingAnimation.current) return false;
 
         isShowingInfo.showing = !isShowingInfo.showing;
@@ -74,6 +74,8 @@ export default function App() {
         if (!isShowingInfo.showing) {
             typeWriterIndex.index = 0;
             document.getElementById("paragraph").innerHTML = "";
+        } else {
+            spinSunglasses();
         }
         typeWriter();
     };
@@ -126,6 +128,24 @@ export default function App() {
         });
     };
 
+    const spinSunglasses = () => {
+        if (playingAnimation.current) return;
+
+        playingAnimation.current = true;
+        gsap.to(glassesRef.current[viewingNumber.number].rotation, {
+            duration: 1,
+            y: Math.PI,
+            ease: "power2.inOut",
+            onComplete: () => {
+                gsap.to(glassesRef.current[viewingNumber.number].rotation, {
+                    duration: 1,
+                    y: 0,
+                    ease: "power2.inOut",
+                }).delay(1);
+            },
+        });
+    };
+
     return (
         <Suspense fallback={null}>
             <SwitchArrows direction="left" onClick={handleLeftClick} />
@@ -171,7 +191,7 @@ export default function App() {
                     maxDistance={2.7}
                 />
 
-                <Glasses ref={groupRef} name="sunglasses" />
+                <Glasses ref={groupRef} name="sunglasses" glassesRef={glassesRef} />
 
                 <group position={[0, 1, -2]} rotation={[0, Math.PI, 0]} scale={1.6}>
                     <Screen src={video} />
