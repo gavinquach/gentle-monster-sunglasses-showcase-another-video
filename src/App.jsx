@@ -68,13 +68,13 @@ export default function App() {
         if (playingAnimation.current) return false;
 
         isShowingInfo.showing = !isShowingInfo.showing;
-        document.getElementById("infoBox").style.display = isShowingInfo.showing
-            ? "block"
-            : "none";
         if (!isShowingInfo.showing) {
-            typeWriterIndex.index = 0;
+            document.getElementById("infoBox").style.display = "none";
             document.getElementById("paragraph").innerHTML = "";
+            typeWriterIndex.index = 0;
         } else {
+            document.getElementById("infoBox").style.display = "block";
+            document.getElementById("infoButton").style.color = "gray";
             spinSunglasses();
         }
         typeWriter();
@@ -141,6 +141,10 @@ export default function App() {
                     duration: 1,
                     y: 0,
                     ease: "power2.inOut",
+                    onComplete: () => {
+                        playingAnimation.current = false;
+                        document.getElementById("infoButton").style.color = "black";
+                    },
                 }).delay(1);
             },
         });
