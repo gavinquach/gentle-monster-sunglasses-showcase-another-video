@@ -1,5 +1,5 @@
 import { Center, useVideoTexture } from "@react-three/drei";
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
 
 const CurvedPlane = lazy(() => import("./CurvedPlane"));
@@ -37,13 +37,14 @@ function VideoMaterial({ src, setVideo }) {
     texture.repeat.x = -1;
     texture.offset.x = 1;
 
-    setVideo?.(texture.image);
+    useEffect(() => {
+        setVideo?.(texture.image);
+    }, [setVideo, texture.image]);
 
     return (
         <meshStandardMaterial
             side={THREE.DoubleSide}
             map={texture}
-            toneMapped={false}
             transparent
             opacity={0.9}
         />

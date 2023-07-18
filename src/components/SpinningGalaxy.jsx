@@ -52,6 +52,7 @@ export default function SpinningGalaxy({ innerColor, outerColor, ...props }) {
         vertexColors: true,
         transparent: true,
         opacity: 0.6,
+        toneMapped: true,
     });
     galaxyObject.particleMaterialOuter = new PointsMaterial({
         size: 0.1,
@@ -62,6 +63,7 @@ export default function SpinningGalaxy({ innerColor, outerColor, ...props }) {
         vertexColors: true,
         transparent: true,
         opacity: 1,
+        toneMapped: true,
         map: galaxyParticleImg
     });
 

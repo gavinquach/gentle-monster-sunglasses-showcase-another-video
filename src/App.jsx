@@ -1,41 +1,27 @@
-import { lazy, Suspense, useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, Preload, Stars } from "@react-three/drei";
 import { gsap } from "gsap";
 
 import { video } from "./videos";
+import { Glasses } from "./components/Glasses";
+import SwitchArrows from "./components/SwitchArrows/SwitchArrows";
+import Screen from "./components/VideoPlayer/Screen";
 
-// HTML elements
-const SwitchArrows = lazy(() =>
-    import("./components/SwitchArrows/SwitchArrows")
-);
-
-// Sunglasses
-const CazalSunglasses = lazy(() =>
-    import("./components/Models/CazalSunglasses")
-);
-const DarkSunglasses = lazy(() => import("./components/Models/DarkSunglasses"));
-const WhiteSunglasses = lazy(() =>
-    import("./components/Models/WhiteSunglasses")
-);
-
-// Showcase wrapper for sunglasses
-const ShowcaseWrapper = lazy(() => import("./components/ShowcaseWrapper"));
-
-// Video players
-const Screen = lazy(() => import("./components/VideoPlayer/Screen"));
+import { viewingNumber } from "./global.js";
 
 export default function App() {
     const groupRef = useRef();
     const playingAnimation = useRef(false);
-    const viewingNumber = useRef(0);
+    const viewingNumberRef = useRef(0);
 
     const prepareAnimation = (direction) => {
         if (playingAnimation.current) return false;
         if (direction === "left") {
-            if (viewingNumber.current === 0) return false;
+            if (viewingNumberRef.current === 0) return false;
         } else {
-            if (viewingNumber.current === groupRef.current.children.length - 1) return false;
+            if (viewingNumberRef.current === groupRef.current.children.length - 1)
+                return false;
         }
 
         // set playing animation to true
@@ -52,8 +38,9 @@ export default function App() {
             x: groupRef.current.position.x + 3,
             ease: "power2.inOut",
             onComplete: () => {
-                viewingNumber.current -= 1;
+                viewingNumberRef.current -= 1;
                 playingAnimation.current = false;
+                viewingNumber.number = viewingNumberRef.current;
             },
         });
     };
@@ -66,8 +53,9 @@ export default function App() {
             x: groupRef.current.position.x - 3,
             ease: "power2.inOut",
             onComplete: () => {
-                viewingNumber.current += 1;
+                viewingNumberRef.current += 1;
                 playingAnimation.current = false;
+                viewingNumber.number = viewingNumberRef.current;
             },
         });
     };
@@ -113,17 +101,7 @@ export default function App() {
                     maxDistance={2.7}
                 />
 
-                <group ref={groupRef} name="sunglasses">
-                    <ShowcaseWrapper order={0} innerColor="#ff2020" outerColor="#2877ff">
-                        <WhiteSunglasses />
-                    </ShowcaseWrapper>
-                    <ShowcaseWrapper order={1} innerColor="#b61d1d" outerColor="#f7ea31">
-                        <DarkSunglasses />
-                    </ShowcaseWrapper>
-                    <ShowcaseWrapper order={2} innerColor="#9948DD" outerColor="#1C3277">
-                        <CazalSunglasses />
-                    </ShowcaseWrapper>
-                </group>
+                <Glasses ref={groupRef} name="sunglasses" />
 
                 <group position={[0, 1, -2]} rotation={[0, Math.PI, 0]} scale={1.6}>
                     <Screen src={video} />
