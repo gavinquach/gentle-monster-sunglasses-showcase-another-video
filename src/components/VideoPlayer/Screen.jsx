@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const CurvedPlane = lazy(() => import("./CurvedPlane"));
 
-export default function Screen({ src }) {
+export const Screen = ({ src }) => {
     const [video, setVideo] = useState();
 
     const ratio = 16 / 9;

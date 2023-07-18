@@ -18,7 +18,7 @@ const rightArrow = (
     </svg>
 );
 
-export default function SwitchArrows({ direction, onClick }) {
+export const SwitchArrows = ({ direction, onClick }) => {
     const ArrowComponent = direction === "left" ? LeftArrow : RightArrow;
     const arrowSymbol = direction === "left" ? leftArrow : rightArrow;
 

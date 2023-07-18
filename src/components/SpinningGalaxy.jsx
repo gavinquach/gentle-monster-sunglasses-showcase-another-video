@@ -11,26 +11,26 @@ import {
 
 import galaxyparticles from "../images/galaxyparticles.png";
 
+const getRandomFloat = (min, max) => {
+    return Math.random() * (max - min) + min;
+};
+
+const galaxyObject = {
+    innerGeometry: null,
+    outerGeometry: null,
+    particleMaterialInner: null,
+    particleMaterialOuter: null,
+};
+
 export default function SpinningGalaxy({ innerColor, outerColor, ...props }) {
     const galaxyRef = useRef();
     const galaxyParticleImg = useTexture(galaxyparticles);
-
-    const galaxyObject = {
-        innerGeometry: null,
-        outerGeometry: null,
-        particleMaterialInner: null,
-        particleMaterialOuter: null,
-    };
 
     useFrame((_, delta) => {
         if (galaxyRef.current) {
             galaxyRef.current.rotation.y += delta * 0.05;
         }
     });
-
-    const getRandomFloat = (min, max) => {
-        return Math.random() * (max - min) + min;
-    };
 
     const particleParams = {
         count: 50000,

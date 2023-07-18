@@ -5,24 +5,90 @@ import { gsap } from "gsap";
 
 import { video } from "./videos";
 import { Glasses } from "./components/Glasses";
-import SwitchArrows from "./components/SwitchArrows/SwitchArrows";
-import Screen from "./components/VideoPlayer/Screen";
+import { SwitchArrows } from "./components/SwitchArrows/SwitchArrows";
+import { Screen } from "./components/VideoPlayer/Screen";
+import { InfoButton } from "./components/InfoButton/InfoButton";
+import { InfoBox } from "./components/InfoBox/InfoBox";
+// import { MatrixRain } from "./components/MatrixRain/MatrixRain";
 
-import { viewingNumber } from "./global.js";
+import { isShowingInfo, typeWriterIndex, viewingNumber } from "./global.js";
+
+const info = {
+    0: {
+        name: "Nada 01",
+        description: `Discover the NADA 01 sunglasses from Gentle Monster’s
+        2023 Collection. Featuring a simple black frame and a cat-eye
+        version of the square silhouette, the iconic metal detail on
+        the temples adds a touch of sophistication to this piece.
+   `,
+    },
+    1: {
+        name: "Duda 02(G)",
+        description: `Duda 02(G) is an aviator silhouetted silver metal frame
+        with 99.9% UV protected grey gradient lenses. The design is highlighted
+        by the elegantly flowing lines of the front and temples.`,
+    },
+};
 
 export default function App() {
     const groupRef = useRef();
     const playingAnimation = useRef(false);
-    const viewingNumberRef = useRef(0);
+
+    const typeWriter = () => {
+        if (!isShowingInfo.showing) return;
+
+        const name = info[viewingNumber.number]?.name || null;
+        const description = info[viewingNumber.number]?.description || null;
+
+        document.getElementById("infoBoxName").innerHTML = name || "Unknown";
+
+        if (description === null) {
+            document.getElementById("paragraph").innerHTML = "N/A";
+            return;
+        }
+
+        if (typeWriterIndex.index < description.length) {
+            document.getElementById("paragraph").innerHTML += description.charAt(typeWriterIndex.index);
+            typeWriterIndex.index++;
+
+            // lower the timeout to make the typing faster
+            setTimeout(typeWriter, 20);
+        }
+    };
+
+    const closeInfoBox = () => {
+        isShowingInfo.showing = false;
+        document.getElementById("infoBox").style.display = "none";
+        typeWriterIndex.index = 0;
+        document.getElementById("paragraph").innerHTML = "";
+    };
+
+    const toggleShowInfo = () => {
+        console.log("toggleShowInfo");
+        if (playingAnimation.current) return false;
+
+        isShowingInfo.showing = !isShowingInfo.showing;
+        document.getElementById("infoBox").style.display = isShowingInfo.showing
+            ? "block"
+            : "none";
+        if (!isShowingInfo.showing) {
+            typeWriterIndex.index = 0;
+            document.getElementById("paragraph").innerHTML = "";
+        }
+        typeWriter();
+    };
 
     const prepareAnimation = (direction) => {
         if (playingAnimation.current) return false;
         if (direction === "left") {
-            if (viewingNumberRef.current === 0) return false;
+            if (viewingNumber.number === 0) return false;
         } else {
-            if (viewingNumberRef.current === groupRef.current.children.length - 1)
+            if (viewingNumber.number === groupRef.current.children.length - 1)
                 return false;
         }
+
+        closeInfoBox();
+        document.getElementById("infoButton").style.color = "gray";
 
         // set playing animation to true
         playingAnimation.current = true;
@@ -38,9 +104,9 @@ export default function App() {
             x: groupRef.current.position.x + 3,
             ease: "power2.inOut",
             onComplete: () => {
-                viewingNumberRef.current -= 1;
+                viewingNumber.number -= 1;
                 playingAnimation.current = false;
-                viewingNumber.number = viewingNumberRef.current;
+                document.getElementById("infoButton").style.color = "black";
             },
         });
     };
@@ -53,9 +119,9 @@ export default function App() {
             x: groupRef.current.position.x - 3,
             ease: "power2.inOut",
             onComplete: () => {
-                viewingNumberRef.current += 1;
+                viewingNumber.number += 1;
                 playingAnimation.current = false;
-                viewingNumber.number = viewingNumberRef.current;
+                document.getElementById("infoButton").style.color = "black";
             },
         });
     };
@@ -64,6 +130,10 @@ export default function App() {
         <Suspense fallback={null}>
             <SwitchArrows direction="left" onClick={handleLeftClick} />
             <SwitchArrows direction="right" onClick={handleRightClick} />
+            {/* <MatrixRain /> */}
+
+            <InfoButton onClick={toggleShowInfo} />
+            <InfoBox />
 
             <Canvas
                 shadows="accumulative"
