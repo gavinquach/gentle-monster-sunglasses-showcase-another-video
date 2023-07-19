@@ -22,7 +22,7 @@ export const Screen = ({ src }) => {
             <CurvedPlane width={width} height={width / r} radius={radius}>
                 <Suspense
                     fallback={
-                        <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
+                        <meshBasicMaterial color={0x000000} side={THREE.DoubleSide} />
                     }
                 >
                     <VideoMaterial src={src} setVideo={setVideo} />
