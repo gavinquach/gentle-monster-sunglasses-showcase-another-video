@@ -2,23 +2,24 @@ import styled from "styled-components";
 
 export const InfoButtonStyled = styled.div`
     position: absolute;
-    top: 20%;
+    bottom: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 6.5rem;
+    width: 5rem;
     height: 5rem;
-    border-radius: 25%;
+    border-radius: 50%;
     color: black;
     text-decoration: none;
     font-family: 'Arial', sans-serif;
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    background-color: #f8f8f888;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* white to gray gradient for background color from top to bottom */
+    background: linear-gradient(180deg, #f0f0f0, #d4d4d4);
+    box-shadow: 0 0.5rem 1ch rgba(0, 0, 0, 0.7);
     cursor: pointer;
     user-select: none;
     transition: all 0.3s ease-in-out;
-    z-index: 1;
+    z-index: 2;
 
     /* center element inside */
     display: flex;
@@ -32,4 +33,11 @@ export const InfoButtonStyled = styled.div`
     &:active {
         transform: translate(-50%, -50%) scale(0.9);
     }
+
+    @media (max-width: 768px) {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1rem;
+    }
+`;
 `;
