@@ -16,15 +16,31 @@ export const InfoBoxContainerStyled = styled.div`
     user-select: none;
     pointer-events: none;
     z-index: 1;
+
+    @media (max-width: 768px) {
+        width: 60%;
+        top: 20%;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+    }
 `;
 
 export const InfoBoxHeaderStyled = styled.div`
     font-size: 2rem;
     margin-bottom: 3rem;
     color: #ffffff;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
 `;
 
 export const InfoBoxParagraphStyled = styled.p`
     font-size: 1.5rem;
     color: #ffffff;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+    }
 `;
