@@ -12,6 +12,7 @@ import { InfoBox } from "./components/InfoBox/InfoBox";
 // import { MatrixRain } from "./components/MatrixRain/MatrixRain";
 
 import { isShowingInfo, typeWriterIndex, viewingNumber } from "./global.js";
+import { Camera } from "./components/Camera";
 
 const info = {
     0: {
@@ -33,7 +34,7 @@ const info = {
         description: `Duda 02(G) is an aviator silhouetted silver metal frame
         with 99.9% UV protected grey gradient lenses. The design is highlighted
         by the elegantly flowing lines of the front and temples.`,
-    }
+    },
 };
 
 export default function App() {
@@ -55,7 +56,9 @@ export default function App() {
         }
 
         if (typeWriterIndex.index < description.length) {
-            document.getElementById("paragraph").innerHTML += description.charAt(typeWriterIndex.index);
+            document.getElementById("paragraph").innerHTML += description.charAt(
+                typeWriterIndex.index
+            );
             typeWriterIndex.index++;
 
             // lower the timeout to make the typing faster
@@ -143,15 +146,17 @@ export default function App() {
             y: Math.PI,
             ease: "power2.inOut",
             onComplete: () => {
-                gsap.to(glassesRef.current[viewingNumber.number].rotation, {
-                    duration: 1,
-                    y: 0,
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                        playingAnimation.current = false;
-                        document.getElementById("infoButton").style.color = "black";
-                    },
-                }).delay(1);
+                gsap
+                    .to(glassesRef.current[viewingNumber.number].rotation, {
+                        duration: 1,
+                        y: 0,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            playingAnimation.current = false;
+                            document.getElementById("infoButton").style.color = "black";
+                        },
+                    })
+                    .delay(1);
             },
         });
     };
@@ -165,12 +170,9 @@ export default function App() {
             <InfoButton onClick={toggleShowInfo} />
             <InfoBox />
 
-            <Canvas
-                shadows="accumulative"
-                dpr={[1, 1.5]}
-                camera={{ position: [0, 2.27, 4], fov: 30, near: 0.01, far: 200 }}
-            >
+            <Canvas shadows="accumulative" dpr={[1, 1.5]}>
                 <color attach="background" args={["#0b0b0b"]} />
+                <Camera />
                 <Environment files={"/umhlanga_sunrise_2k.hdr"} />
                 <Stars
                     radius={50}
