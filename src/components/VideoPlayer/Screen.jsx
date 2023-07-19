@@ -21,14 +21,16 @@ export const Screen = ({ src }) => {
         <Center top position-z={z}>
             <CurvedPlane width={width} height={width / r} radius={radius}>
                 <Suspense
-                    fallback={<meshStandardMaterial side={THREE.DoubleSide} wireframe />}
+                    fallback={
+                        <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
+                    }
                 >
                     <VideoMaterial src={src} setVideo={setVideo} />
                 </Suspense>
             </CurvedPlane>
         </Center>
     );
-}
+};
 
 function VideoMaterial({ src, setVideo }) {
     const texture = useVideoTexture(src);
