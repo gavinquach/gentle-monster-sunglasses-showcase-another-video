@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { Bloom, EffectComposer, SMAA } from "@react-three/postprocessing";
 
 import ShowcaseWrapper from "./ShowcaseWrapper";
 import CazalSunglasses from "./Models/CazalSunglasses";
@@ -28,7 +28,8 @@ export const Glasses = forwardRef((props, ref) => {
                 </ShowcaseWrapper>
             </group>
 
-            <EffectComposer>
+            <EffectComposer multisampling={0}>
+                <SMAA />
                 <Bloom intensity={0.8} mipmapBlur />
             </EffectComposer>
         </>
