@@ -18,6 +18,10 @@ export const InfoButtonStyled = styled.div`
     box-shadow: 0 0.5rem 1ch rgba(0, 0, 0, 0.7);
     cursor: pointer;
     user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
     transition: all 0.3s ease-in-out;
     z-index: 2;
 
