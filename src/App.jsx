@@ -28,6 +28,12 @@ const info = {
         with 99.9% UV protected grey gradient lenses. The design is highlighted
         by the elegantly flowing lines of the front and temples.`,
     },
+    2: {
+        name: "Duda 02(G)",
+        description: `Duda 02(G) is an aviator silhouetted silver metal frame
+        with 99.9% UV protected grey gradient lenses. The design is highlighted
+        by the elegantly flowing lines of the front and temples.`,
+    }
 };
 
 export default function App() {
